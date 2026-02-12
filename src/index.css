@@ -1,0 +1,16 @@
+@import url('./styles/bootstrap.min.css');
+@import url('./styles/custom.css');
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+}
+
+body {
+  display: block;
+  min-height: 100vh;
+  min-width: 320px;
+}
