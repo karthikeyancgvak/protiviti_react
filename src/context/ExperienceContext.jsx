@@ -60,6 +60,7 @@ export function ExperienceProvider({ children }) {
     setQuestionIndex(0)
     setQuestionPhase('intro')
     setAnswers({})
+    setProfile({ firstName: '', lastName: '' })
   }
 
   const value = {
