@@ -21,14 +21,14 @@ export const QUESTIONS = [
     options: [
       'One is fast but unfinished',
       'One is solid but crowded',
-      'One is familiar but limited',
+      'One is steady, but not exciting',
       'One is new, but unproven',
     ],
   },
   {
     id: 'q3',
     prompt:
-      'Everything hits at once. Four interruptions arrive quickly. You can address one first. What gets your focus?',
+      'Everything hits at once. Four interruptions animate in rapidly. Player must act or time expires.',
     title: 'What do you do?',
     timerSeconds: 10,
     options: [
