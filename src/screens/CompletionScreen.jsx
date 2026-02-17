@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useExperience } from '../context/ExperienceContext'
 import { AssetImage } from '../components/AssetImage'
 import {
@@ -22,6 +22,33 @@ export function CompletionScreen() {
   const score = useMemo(() => calculateScore(answers, QUESTIONS), [answers])
   const personaKey = useMemo(() => getPersonaKeyFromScore(score), [score])
   const persona = PERSONA_PROFILES[personaKey]
+  const answerSummary = useMemo(
+    () =>
+      QUESTIONS.map((question) => {
+        const selectedIndex = answers?.[question.id]
+        const hasAnswer = typeof selectedIndex === 'number' && selectedIndex >= 0 && selectedIndex < question.options.length
+
+        return {
+          questionId: question.id,
+          question: question.prompt,
+          selectedOptionIndex: hasAnswer ? selectedIndex : null,
+          selectedOptionText: hasAnswer ? question.options[selectedIndex] : null,
+        }
+      }),
+    [answers],
+  )
+
+  useEffect(() => {
+    const completionPayload = {
+      participantName: fullName,
+      totalScore: score,
+      maxScore: 20,
+      personaKey,
+      responses: answerSummary,
+    }
+
+    console.log('Completion payload (ready for API):', completionPayload)
+  }, [answerSummary, fullName, personaKey, score])
 
   const personaIconMap = {
     compass: compassIcon,
