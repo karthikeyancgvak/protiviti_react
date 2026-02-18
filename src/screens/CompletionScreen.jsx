@@ -87,7 +87,7 @@ export function CompletionScreen() {
         <div className="container">
           <div className="row content-row">
             <div className="col-lg-8">
-              <div className="shield-section text-center">
+              <div className="shield-section h-100 text-center">
                 <div className="container">
                   <h2 className="main-title mb-4">{persona.title}</h2>
                   <div className="shield-icon">
