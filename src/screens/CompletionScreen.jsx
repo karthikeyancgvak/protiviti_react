@@ -166,22 +166,24 @@ export function CompletionScreen() {
                         }}
                       >
                         <div className="mb-4">
-                          <input type="email" className="form-control custom-input" placeholder="Business email address" />
+                          <input type="email" className="form-control custom-input" placeholder="Business email address" required />
                         </div>
 
                         <div className="mb-4 position-relative">
                           <select
                             className="form-select custom-input"
-                            defaultValue="Country"
+                            defaultValue=""
+                            required
                             style={{ backgroundImage: `url(${dropDownBlue})` }}
                           >
-                            <option value="Country">
+                            <option value="" disabled hidden>
                               Country
                             </option>
-                            <option>India</option>
-                            <option>United States</option>
-                            <option>United Kingdom</option>
+                            <option value="India">India</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
                           </select>
+
                         </div>
 
                         <div className="form-check d-flex align-items-center">
