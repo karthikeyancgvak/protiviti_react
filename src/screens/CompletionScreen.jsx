@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useExperience } from '../context/ExperienceContext'
 import { AssetImage } from '../components/AssetImage'
 import {
@@ -16,8 +16,53 @@ import {
 import { QUESTIONS } from '../data/questions'
 import { PERSONA_PROFILES, calculateScore, getPersonaKeyFromScore } from '../data/personaProfiles'
 
+const ELOQUA_FORM_URL = 'https://s1967927849.t.eloqua.com/e/f2'
+const ELOQUA_FORM_NAME = '2026GAAMBooth'
+const ELOQUA_SITE_ID = '1967927849'
+
+const COUNTRY_OPTIONS = [
+  'Australia',
+  'Canada',
+  'France',
+  'Germany',
+  'Hong Kong S.A.R., China',
+  'India',
+  'Italy',
+  'Japan',
+  'The Netherlands',
+  'Singapore',
+  'United Kingdom',
+  'United States',
+  'Argentina',
+  'Bahrain',
+  'Bulgaria',
+  'Brazil',
+  'Chile',
+  'Colombia',
+  'Egypt',
+  'Kuwait',
+  'Mexico',
+  'Oman',
+  'Peru',
+  'Qatar',
+  'Saudi Arabia',
+  'South Africa',
+  'Switzerland',
+  'United Arab Emirates',
+  'Venezuela',
+]
+
 export function CompletionScreen() {
   const { restartFlow, profile, answers, missingAssets, markAssetMissing } = useExperience()
+  const [formState, setFormState] = useState({
+    emailAddress: '',
+    country: '',
+    followUp: false,
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const redirectTimerRef = useRef(null)
   const fullName = `${profile.firstName} ${profile.lastName}`.trim() || 'Guest User'
   const score = useMemo(() => calculateScore(answers, QUESTIONS), [answers])
   const personaKey = useMemo(() => getPersonaKeyFromScore(score), [score])
@@ -59,6 +104,57 @@ export function CompletionScreen() {
 
   const iconMissingKey = `persona_${personaKey}`
 
+  useEffect(() => {
+    return () => {
+      if (redirectTimerRef.current) {
+        clearTimeout(redirectTimerRef.current)
+      }
+    }
+  }, [])
+
+  const handleReportSubmit = async (event) => {
+    event.preventDefault()
+    setSubmitError('')
+    setIsSubmitted(false)
+    setIsSubmitting(true)
+
+    try {
+      const payload = new URLSearchParams({
+        elqFormName: ELOQUA_FORM_NAME,
+        elqSiteId: ELOQUA_SITE_ID,
+        elqCampaignId: '',
+        emailAddress: formState.emailAddress,
+        country: formState.country,
+        Firstname: profile.firstName,
+        lastname: profile.lastName,
+        type: persona.title,
+      })
+
+      if (formState.followUp) {
+        payload.set('singleCheckbox2', 'on')
+      }
+
+      await fetch(ELOQUA_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: payload.toString(),
+      })
+
+      setIsSubmitted(true)
+      redirectTimerRef.current = setTimeout(() => {
+        restartFlow()
+      }, 2000)
+    } catch (error) {
+      console.error('Failed to submit report form:', error)
+      setSubmitError('Unable to submit right now. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section className="completion-result">
       <section className="hero result">
@@ -87,7 +183,7 @@ export function CompletionScreen() {
         <div className="container">
           <div className="row content-row">
             <div className="col-lg-8">
-              <div className="shield-section h-100 text-center">
+              <div className="shield-section text-center">
                 <div className="container">
                   <h2 className="main-title mb-4">{persona.title}</h2>
                   <div className="shield-icon">
@@ -151,59 +247,66 @@ export function CompletionScreen() {
                       <h1 className="report-title">Want the full report?</h1>
 
                       <p className="report-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus arcu vel neque auctor
-                        pretium. Vivamus diam eros, placerat sed metus in, consectetur mollis nibh. Nullam sed vehicula
-                        nunc, et pellentesque lectus. Integer placerat imperdiet tincidunt. Quisque accumsan, sapien a
-                        sodales lacinia, purus massa pretium tellus, vitae varius nulla nisl vel magna. Morbi molestie nec
-                        ipsum eu faucibus. In sollicitudin nibh vitae cursus tristique.
+                        Please provide your details below to receive your automated Transformation type response and full
+                        report follow-up.
                       </p>
 
-                      <form
-                        className="report-form mt-5"
-                        onSubmit={(event) => {
-                          event.preventDefault()
-                          restartFlow()
-                        }}
-                      >
+                      <form className="report-form mt-5" onSubmit={handleReportSubmit}>
                         <div className="mb-4">
-                          <input type="email" className="form-control custom-input" placeholder="Business email address" required />
+                          <input
+                            type="email"
+                            className="form-control custom-input"
+                            placeholder="Email Address"
+                            value={formState.emailAddress}
+                            onChange={(event) => setFormState((prev) => ({ ...prev, emailAddress: event.target.value }))}
+                            required
+                          />
                         </div>
 
                         <div className="mb-4 position-relative">
                           <select
                             className="form-select custom-input"
-                            defaultValue=""
+                            value={formState.country}
+                            onChange={(event) => setFormState((prev) => ({ ...prev, country: event.target.value }))}
                             required
                             style={{ backgroundImage: `url(${dropDownBlue})` }}
                           >
                             <option value="" disabled hidden>
-                              Country
+                              Please Select
                             </option>
-                            <option value="India">India</option>
-                            <option value="United States">United States</option>
-                            <option value="United Kingdom">United Kingdom</option>
+                            {COUNTRY_OPTIONS.map((country) => (
+                              <option key={country} value={country}>
+                                {country}
+                              </option>
+                            ))}
                           </select>
-
                         </div>
 
                         <div className="form-check d-flex align-items-center">
-                          <input className="form-check-input custom-checkbox" type="checkbox" id="promo" />
+                          <input
+                            className="form-check-input custom-checkbox"
+                            type="checkbox"
+                            id="promo"
+                            checked={formState.followUp}
+                            onChange={(event) => setFormState((prev) => ({ ...prev, followUp: event.target.checked }))}
+                          />
                           <label className="form-check-label" htmlFor="promo">
-                            Would you like to be contacted about future promotions or content?
+                            Would you like to be contacted for a follow up
                           </label>
                         </div>
 
-                        <button type="submit" className="themeBtn themeBtn-reset">
-                          Submit
+                        <button type="submit" className="themeBtn themeBtn-reset" disabled={isSubmitting || isSubmitted}>
+                          {isSubmitting ? 'Submitting...' : 'Submit'}
                         </button>
                       </form>
 
                       <p className="small-note mt-4">
-                        It is a long established fact that a reader will be distracted by the readable content of a page
-                        when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                        distribution of letters, as opposed to using &apos;Content here, content here&apos;, making it look
-                        like readable English.
+                        By submitting this form, I understand that I will receive an automated response with my
+                        Transformation type.
                       </p>
+                      {isSubmitting ? <p className="small-note mt-2">Please wait, submitting your response...</p> : null}
+                      {isSubmitted ? <p className="small-note mt-2">Thank You For your response</p> : null}
+                      {submitError ? <p className="small-note mt-2">{submitError}</p> : null}
                     </div>
                   </div>
                 </div>
