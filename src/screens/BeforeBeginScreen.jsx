@@ -7,10 +7,43 @@ export function BeforeBeginScreen() {
   const { beginExperience, updateProfile, profile, missingAssets, markAssetMissing } = useExperience()
   const [firstName, setFirstName] = useState(profile.firstName)
   const [lastName, setLastName] = useState(profile.lastName)
+  const [errors, setErrors] = useState({ firstName: '', lastName: '' })
+
+  const namePattern = /^[A-Za-z]+$/
+
+  const validateName = (value, fieldLabel) => {
+    const trimmed = value.trim()
+    if (!trimmed) return ''
+    if (!namePattern.test(trimmed)) {
+      return `${fieldLabel} must contain letters only.`
+    }
+    return ''
+  }
+
+  const validateForm = () => {
+    const nextErrors = {
+      firstName: validateName(firstName, 'First name'),
+      lastName: validateName(lastName, 'Last name'),
+    }
+    setErrors(nextErrors)
+    return !nextErrors.firstName && !nextErrors.lastName
+  }
 
   const onSubmit = (event) => {
     event.preventDefault()
-    updateProfile({ firstName: firstName.trim(), lastName: lastName.trim() })
+    const trimmedFirstName = firstName.trim()
+    const trimmedLastName = lastName.trim()
+
+    // Keep empty-field validation as native browser behavior, and show
+    // custom inline errors only for non-letter characters.
+    if (!trimmedFirstName || !trimmedLastName) {
+      return
+    }
+
+    if (!validateForm()) {
+      return
+    }
+    updateProfile({ firstName: trimmedFirstName, lastName: trimmedLastName })
     beginExperience()
   }
 
@@ -38,22 +71,38 @@ export function BeforeBeginScreen() {
             <div className="col-md-6">
               <input
                 type="text"
-                className="form-control custom-input"
+                className={`form-control custom-input ${errors.firstName ? 'is-invalid' : ''}`}
                 placeholder="First Name"
                 value={firstName}
-                onChange={(event) => setFirstName(event.target.value)}
+                onChange={(event) => {
+                  setFirstName(event.target.value)
+                  if (errors.firstName) {
+                    setErrors((prev) => ({ ...prev, firstName: validateName(event.target.value, 'First name') }))
+                  }
+                }}
+                onBlur={() => setErrors((prev) => ({ ...prev, firstName: validateName(firstName, 'First name') }))}
+                maxLength={40}
                 required
               />
+              {errors.firstName ? <div className="invalid-feedback d-block">{errors.firstName}</div> : null}
             </div>
             <div className="col-md-6">
               <input
                 type="text"
-                className="form-control custom-input"
+                className={`form-control custom-input ${errors.lastName ? 'is-invalid' : ''}`}
                 placeholder="Last Name"
                 value={lastName}
-                onChange={(event) => setLastName(event.target.value)}
+                onChange={(event) => {
+                  setLastName(event.target.value)
+                  if (errors.lastName) {
+                    setErrors((prev) => ({ ...prev, lastName: validateName(event.target.value, 'Last name') }))
+                  }
+                }}
+                onBlur={() => setErrors((prev) => ({ ...prev, lastName: validateName(lastName, 'Last name') }))}
+                maxLength={40}
                 required
               />
+              {errors.lastName ? <div className="invalid-feedback d-block">{errors.lastName}</div> : null}
             </div>
           </div>
 
