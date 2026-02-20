@@ -937,3 +937,10 @@ body {
         font-size: 60px;
     }
 }
+@media (max-width: 1920px) {
+    .hero.moment-one .question span {
+        font-size: 90px;
+        line-height: 85px;
+        letter-spacing: -2px;
+    }
+}
