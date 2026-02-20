@@ -928,3 +928,12 @@ body {
 @media(min-width:2400px) {
     .form-wrapper .invalid-feedback { font-size: 65px; }
 }
+
+@media (max-width: 1600px) {
+    .hero.moment-one .question h1 {
+        font-size: 50px;
+    }
+    .hero.moment-one .question span {
+        font-size: 60px;
+    }
+}
