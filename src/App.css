@@ -1,3 +1,6 @@
+body {
+  background: #50A3D7 !important;
+}
 .hero-swiper {
   height: 100vh;
   overflow: hidden;
