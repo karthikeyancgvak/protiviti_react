@@ -914,3 +914,14 @@ body {
     padding: 40px 15px;
   }
 }
+@media(min-width:1500px) {
+    .form-wrapper .invalid-feedback { font-size: 22px; position: relative; }
+}
+ 
+@media(min-width:1900px) {
+    .form-wrapper .invalid-feedback { font-size: 30px; }
+}
+ 
+@media(min-width:2400px) {
+    .form-wrapper .invalid-feedback { font-size: 80px; }
+}
