@@ -923,5 +923,5 @@ body {
 }
  
 @media(min-width:2400px) {
-    .form-wrapper .invalid-feedback { font-size: 80px; }
+    .form-wrapper .invalid-feedback { font-size: 70px; }
 }
