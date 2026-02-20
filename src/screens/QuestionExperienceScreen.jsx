@@ -37,7 +37,7 @@ function AnswerPhase({ question, onSelect }) {
         </div>
         <div className="three-opt">
           <div className="container">
-            <div className="row content-box">
+            <div className="row row content-box-box">
               {question.options.map((option, optionIndex) => (
                 <div className="col-md-6 content" key={option}>
                   <button
@@ -63,7 +63,7 @@ export function QuestionExperienceScreen() {
   const { questionIndex, questionPhase, moveToAnswerPhase, selectAnswer, profile, missingAssets, markAssetMissing } =
     useExperience()
   const question = QUESTIONS[questionIndex]
-  const fullName = `${profile.firstName} ${profile.lastName}`.trim() || 'Guest'
+  const displayName = profile.firstName.trim() || 'Guest'
 
   return (
     <section className="hero thank-you you-pick moment-one">
@@ -80,7 +80,7 @@ export function QuestionExperienceScreen() {
       </div>
 
       <div className="profile-name">
-        <p>{fullName}</p>
+        <p>{displayName}</p>
       </div>
 
       {questionPhase === 'intro' ? (

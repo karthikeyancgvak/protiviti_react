@@ -64,7 +64,7 @@ export function IntroSwiperScreen() {
     swiper.slideTo(1)
     swiper.allowTouchMove = true
     swiper.params.autoplay = {
-      delay: 3500,
+      delay: 2500,
       disableOnInteraction: false,
     }
     swiper.autoplay.start()

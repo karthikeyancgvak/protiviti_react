@@ -8,6 +8,9 @@ export function BeforeBeginScreen() {
   const [firstName, setFirstName] = useState(profile.firstName)
   const [lastName, setLastName] = useState(profile.lastName)
   const [errors, setErrors] = useState({ firstName: '', lastName: '' })
+  const NAME_MAX_LENGTH = 30
+  const isFirstNameLimitReached = firstName.length === NAME_MAX_LENGTH
+  const isLastNameLimitReached = lastName.length === NAME_MAX_LENGTH
 
   const namePattern = /^[A-Za-z]+$/
 
@@ -81,10 +84,13 @@ export function BeforeBeginScreen() {
                   }
                 }}
                 onBlur={() => setErrors((prev) => ({ ...prev, firstName: validateName(firstName, 'First name') }))}
-                maxLength={40}
+                maxLength={NAME_MAX_LENGTH}
                 required
               />
               {errors.firstName ? <div className="invalid-feedback d-block">{errors.firstName}</div> : null}
+              {!errors.firstName && isFirstNameLimitReached ? (
+                <div className="invalid-feedback d-block">Character limit reached</div>
+              ) : null}
             </div>
             <div className="col-md-6">
               <input
@@ -99,10 +105,13 @@ export function BeforeBeginScreen() {
                   }
                 }}
                 onBlur={() => setErrors((prev) => ({ ...prev, lastName: validateName(lastName, 'Last name') }))}
-                maxLength={40}
+                maxLength={NAME_MAX_LENGTH}
                 required
               />
               {errors.lastName ? <div className="invalid-feedback d-block">{errors.lastName}</div> : null}
+              {!errors.lastName && isLastNameLimitReached ? (
+                <div className="invalid-feedback d-block">Character limit reached</div>
+              ) : null}
             </div>
           </div>
 

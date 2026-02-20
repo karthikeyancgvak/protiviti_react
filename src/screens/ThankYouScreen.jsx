@@ -4,7 +4,7 @@ import { useExperience } from '../context/ExperienceContext'
 
 export function ThankYouScreen() {
   const { continueFromThankYou, profile, missingAssets, markAssetMissing } = useExperience()
-  const fullName = `${profile.firstName} ${profile.lastName}`.trim()
+  const displayName = profile.firstName.trim()
 
   return (
     <section className="hero thank-you blue" onClick={continueFromThankYou}>
@@ -19,7 +19,7 @@ export function ThankYouScreen() {
       </div>
 
       <div className="profile-name">
-        <p>{fullName || 'Guest'}</p>
+        <p>{displayName || 'Guest'}</p>
       </div>
 
       <div className="content">

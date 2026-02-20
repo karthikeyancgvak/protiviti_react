@@ -762,8 +762,9 @@ body {
   }
 
   .completion-result .hero.result .content-wrap h1 {
-    font-size: 60px;
+    font-size: 45px;
     letter-spacing: -2px;
+    margin-top: 8px;
   }
 
   .completion-result .report-section .custom-input {
