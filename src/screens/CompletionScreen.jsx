@@ -59,10 +59,12 @@ export function CompletionScreen() {
     country: '',
     followUp: false,
   })
+  const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const redirectTimerRef = useRef(null)
+  const countryDropdownRef = useRef(null)
   const fullName = `${profile.firstName} ${profile.lastName}`.trim() || 'Guest User'
   const score = useMemo(() => calculateScore(answers, QUESTIONS), [answers])
   const personaKey = useMemo(() => getPersonaKeyFromScore(score), [score])
@@ -112,10 +114,32 @@ export function CompletionScreen() {
     }
   }, [])
 
+  useEffect(() => {
+    const handlePointerDown = (event) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target)) {
+        setIsCountryMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown)
+    document.addEventListener('touchstart', handlePointerDown)
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      document.removeEventListener('touchstart', handlePointerDown)
+    }
+  }, [])
+
   const handleReportSubmit = async (event) => {
     event.preventDefault()
     setSubmitError('')
     setIsSubmitted(false)
+
+    if (!formState.country) {
+      setSubmitError('Please select a country.')
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -263,23 +287,38 @@ export function CompletionScreen() {
                           />
                         </div>
 
-                        <div className="mb-4 position-relative">
-                          <select
-                            className="form-select custom-input"
-                            value={formState.country}
-                            onChange={(event) => setFormState((prev) => ({ ...prev, country: event.target.value }))}
-                            required
+                        <div className="mb-4 position-relative country-dropdown" ref={countryDropdownRef}>
+                          <button
+                            type="button"
+                            className={`custom-input country-trigger ${isCountryMenuOpen ? 'is-open' : ''}`}
+                            onClick={() => setIsCountryMenuOpen((prev) => !prev)}
                             style={{ backgroundImage: `url(${dropDownBlue})` }}
+                            aria-haspopup="listbox"
+                            aria-expanded={isCountryMenuOpen}
                           >
-                            <option value="" disabled hidden>
-                              Please Select
-                            </option>
-                            {COUNTRY_OPTIONS.map((country) => (
-                              <option key={country} value={country}>
-                                {country}
-                              </option>
-                            ))}
-                          </select>
+                            <span className={formState.country ? '' : 'is-placeholder'}>
+                              {formState.country || 'Please Select'}
+                            </span>
+                          </button>
+
+                          {isCountryMenuOpen ? (
+                            <div className="country-menu" role="listbox" aria-label="Country">
+                              {COUNTRY_OPTIONS.map((country) => (
+                                <button
+                                  key={country}
+                                  type="button"
+                                  className={`country-option ${formState.country === country ? 'is-selected' : ''}`}
+                                  onClick={() => {
+                                    setFormState((prev) => ({ ...prev, country }))
+                                    setIsCountryMenuOpen(false)
+                                  }}
+                                >
+                                  {country}
+                                </button>
+                              ))}
+                            </div>
+                          ) : null}
+
                         </div>
 
                         <div className="form-check d-flex align-items-center">
