@@ -1,6 +1,9 @@
 body {
   background: #50A3D7 !important;
 }
+.hero.moment-one .question-screen .content:hover {
+    box-shadow: 0 4px 30.8px 21px #ffffff4a;
+}
 .hero-swiper {
   height: 100vh;
   overflow: hidden;
