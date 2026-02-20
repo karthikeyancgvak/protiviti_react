@@ -164,6 +164,45 @@ body {
   padding: 0 !important;
 }
 
+.row.content-box {
+  padding: 0 2rem;
+}
+
+@media (min-width: 2560px) {
+  .progress-timeline {
+    max-width: 1600px;
+    top: 48px !important;
+    width: calc(100% - 30%);
+  }
+
+  .decision-progress-wrap {
+    max-width: 1450px;
+  }
+
+  .decision-progress {
+    height: 110px;
+    margin-top: 90px;
+  }
+
+  .decision-progress-track,
+  .decision-progress-fill {
+    height: 8px;
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
+
+  .decision-dot {
+    height: 38px;
+    width: 38px;
+  }
+
+  .decision-label {
+    font-size: 28px;
+    margin-top: 14px;
+  }
+}
+
 .hero.moment-one .question h1 {
   line-height: 1.1;
   margin-bottom: 8px;
@@ -455,13 +494,13 @@ body {
 .completion-result .hero.result .content-wrap h1 {
   color: #fff;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 165px;
+  font-size: 140px;
   font-weight: 500;
   letter-spacing: -5px;
   margin-bottom: 0;
   text-align: left;
   text-transform: uppercase;
-  padding: 0;
+  margin-top: 10px;
 }
 
 .completion-result .hero.result .content-wrap p.designation {
