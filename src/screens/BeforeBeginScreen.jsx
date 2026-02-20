@@ -12,13 +12,14 @@ export function BeforeBeginScreen() {
   const isFirstNameLimitReached = firstName.length === NAME_MAX_LENGTH
   const isLastNameLimitReached = lastName.length === NAME_MAX_LENGTH
 
-  const namePattern = /^[A-Za-z]+$/
+  // Allow international letters/diacritics and common separators in names.
+  const namePattern = /^[\p{L}\p{M}]+(?:[ '\-\u2019][\p{L}\p{M}]+)*$/u
 
   const validateName = (value, fieldLabel) => {
     const trimmed = value.trim()
     if (!trimmed) return ''
     if (!namePattern.test(trimmed)) {
-      return `${fieldLabel} must contain letters only.`
+      return `Invalid Characters.`
     }
     return ''
   }
@@ -34,8 +35,8 @@ export function BeforeBeginScreen() {
 
   const onSubmit = (event) => {
     event.preventDefault()
-    const trimmedFirstName = firstName.trim()
-    const trimmedLastName = lastName.trim()
+    const trimmedFirstName = firstName.trim().replace(/\s+/g, ' ')
+    const trimmedLastName = lastName.trim().replace(/\s+/g, ' ')
 
     // Keep empty-field validation as native browser behavior, and show
     // custom inline errors only for non-letter characters.
