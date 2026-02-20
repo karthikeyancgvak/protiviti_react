@@ -37,7 +37,7 @@ function AnswerPhase({ question, onSelect }) {
         </div>
         <div className="three-opt">
           <div className="container">
-            <div className="row row content-box-box">
+            <div className="row content-box">
               {question.options.map((option, optionIndex) => (
                 <div className="col-md-6 content" key={option}>
                   <button
@@ -117,3 +117,4 @@ export function QuestionExperienceScreen() {
     </section>
   )
 }
+
