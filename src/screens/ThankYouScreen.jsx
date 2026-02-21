@@ -4,7 +4,9 @@ import { useExperience } from '../context/ExperienceContext'
 
 export function ThankYouScreen() {
   const { continueFromThankYou, profile, missingAssets, markAssetMissing } = useExperience()
-  const displayName = profile.firstName.trim()
+  const firstName = profile.firstName.trim()
+  const lastInitial = profile.lastName.trim().charAt(0)
+  const displayName = `${firstName}${lastInitial ? ` ${lastInitial}` : ''}`.trim()
 
   return (
     <section className="hero thank-you blue" onClick={continueFromThankYou}>
@@ -26,7 +28,7 @@ export function ThankYouScreen() {
         <div className="content-wrap">
           <div className="container">
             <div className="row">
-              <h1>{`Thank you ${profile.firstName || 'there'}!`}</h1>
+              <h1>{`Thank you ${displayName || 'there'}!`}</h1>
               <p>This will be a short, personalized (4-6 minutes) designed to help you:</p>
 
               <div className="col-md-4">

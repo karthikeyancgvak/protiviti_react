@@ -63,7 +63,9 @@ export function QuestionExperienceScreen() {
   const { questionIndex, questionPhase, moveToAnswerPhase, selectAnswer, profile, missingAssets, markAssetMissing } =
     useExperience()
   const question = QUESTIONS[questionIndex]
-  const displayName = profile.firstName.trim() || 'Guest'
+  const firstName = profile.firstName.trim()
+  const lastInitial = profile.lastName.trim().charAt(0)
+  const displayName = `${firstName}${lastInitial ? ` ${lastInitial}` : ''}`.trim() || 'Guest'
 
   return (
     <section className="hero thank-you you-pick moment-one">
@@ -117,4 +119,3 @@ export function QuestionExperienceScreen() {
     </section>
   )
 }
-
