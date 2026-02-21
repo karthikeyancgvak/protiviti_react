@@ -718,7 +718,8 @@ body {
 
 .completion-result .report-section .small-note {
   color: #444;
-  font-size: 20px;
+  font-size: 27px;
+  font-weight: 500;
   line-height: normal;
 }
 
@@ -737,7 +738,6 @@ body {
 
   .completion-result .report-section .custom-input {
     border-radius: 15px;
-    font-size: 24px;
     height: 95px;
     padding: 18px 25px;
   }

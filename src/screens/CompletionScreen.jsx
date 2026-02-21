@@ -17,7 +17,7 @@ import { QUESTIONS } from '../data/questions'
 import { PERSONA_PROFILES, calculateScore, getPersonaKeyFromScore } from '../data/personaProfiles'
 
 const ELOQUA_FORM_URL = 'https://s1967927849.t.eloqua.com/e/f2'
-const ELOQUA_FORM_NAME = '2026GAAMBooth'
+const ELOQUA_FORM_NAME = 'TPRExperience'
 const ELOQUA_SITE_ID = '1967927849'
 
 const COUNTRY_OPTIONS = [
@@ -35,6 +35,7 @@ const COUNTRY_OPTIONS = [
   'United States',
   'Argentina',
   'Bahrain',
+  'Belgium',
   'Bulgaria',
   'Brazil',
   'Chile',
@@ -147,6 +148,8 @@ export function CompletionScreen() {
         elqFormName: ELOQUA_FORM_NAME,
         elqSiteId: ELOQUA_SITE_ID,
         elqCampaignId: '',
+        elqCustomerGUID: '',
+        elqCookieWrite: '0',
         emailAddress: formState.emailAddress,
         country: formState.country,
         Firstname: profile.firstName,
