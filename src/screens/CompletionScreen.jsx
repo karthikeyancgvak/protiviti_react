@@ -347,7 +347,7 @@ export function CompletionScreen() {
                         Transformation type.
                       </p>
                       {isSubmitting ? <p className="small-note mt-2">Please wait, submitting your response...</p> : null}
-                      {isSubmitted ? <p className="small-note mt-2">Thank You For your response</p> : null}
+                      {isSubmitted ? <p className="small-note mt-2">Thank You For your response v1</p> : null}
                       {submitError ? <p className="small-note mt-2">{submitError}</p> : null}
                     </div>
                   </div>
