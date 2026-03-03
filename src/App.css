@@ -971,9 +971,13 @@ body {
   }
 
   .completion-result .result-contents .profile-label {
-    font-size: 24px;
+    font-size: 32px;
     min-width: 220px;
     margin-bottom: 6px;
+  }
+
+  .completion-result .result-contents .profile-header {
+    gap: 10px;
   }
 
   .completion-result .report-section .report-title {
@@ -1054,6 +1058,7 @@ body {
 
   .completion-result .hero.result {
     padding: 80px 40px 20px;
+    padding-bottom: 16px;
   }
 
   .completion-result .hero.result .overlay {
@@ -1338,5 +1343,31 @@ body {
         font-size: 90px;
         line-height: 85px;
         letter-spacing: -2px;
+    }
+}
+
+
+@media (min-width: 1920px) and (max-width: 2560px) {
+
+    .hero.intro-rotator .intro-copy-slide h1.statement-copy {
+        font-size: clamp(41px, 2.8vw, 67px); /* reduced another ~10% */
+        line-height: 1.16;
+    }
+
+    .hero.intro-rotator .path-copy-top {
+        font-size: clamp(27px, 1.75vw, 43px); /* reduced another ~10% */
+    }
+
+    .hero.intro-rotator .path-copy-bottom {
+        font-size: clamp(52px, 3.8vw, 95px); /* reduced another ~10% */
+    }
+
+    .intro-rotating-copy {
+        height: max-content;
+        bottom: 60px;
+    }
+
+    .intro-touch-hint {
+        bottom: 15px;
     }
 }
