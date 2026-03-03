@@ -811,6 +811,19 @@ body {
   padding: 18px 35px;
 }
 
+.completion-result .report-section .custom-input::placeholder{
+  color: #004068;
+}
+
+.report-list{
+ padding-top: 5px;
+}
+.report-list li{
+  margin-top: 10px;
+  padding-bottom: 5px;
+
+}
+
 .completion-result .report-section .country-dropdown {
   position: relative;
 }

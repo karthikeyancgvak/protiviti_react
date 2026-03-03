@@ -274,13 +274,14 @@ export function CompletionScreen() {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <h1 className="report-title">Want the full report?</h1>
-
-                      <p className="report-desc">
-                        Please provide your details below to receive your automated Transformation type response and full
-                        report follow-up.
-                      </p>
-
+                      <h1 className="report-title">Unlock your full transformation report</h1>
+                      <div className="report-desc">
+                        <ul className="report-list">
+                          <li>Your complete transformation and risk profile</li>
+                          <li>What to address now vs. later</li>
+                          <li>Clear actions to improve clarity and resilience</li>
+                        </ul>
+                      </div>
                       <form className="report-form mt-5" onSubmit={handleReportSubmit}>
                         <div className="mb-4">
                           <input
