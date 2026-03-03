@@ -1,160 +1,80 @@
-import { useMemo, useRef, useState } from 'react'
-import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/effect-fade'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import { protovitiLogo, touchAnywhere } from '../assets/mediaAssets'
-import { AssetImage } from '../components/AssetImage'
+import { useEffect, useState } from 'react'
+import { introVideo } from '../assets/mediaAssets'
 import { useExperience } from '../context/ExperienceContext'
 
+const INTRO_TEXT_SLIDES = [
+  {
+    key: 'path',
+    kind: 'path',
+    lines: ['THE PATH', 'TO TRANSFORMATION'],
+  },
+  {
+    key: 'decisions',
+    kind: 'statement',
+    lines: ['Over the next 24 months,', 'you will make more than 5,000 decisions.'],
+  },
+  {
+    key: 'pressure',
+    kind: 'statement',
+    lines: ['Most will be made under pressure.', "This experience isn't about what you know."],
+  },
+  {
+    key: 'clarity',
+    kind: 'statement',
+    lines: ["It's about how you move forward", 'when clarity is incomplete.'],
+  },
+]
+
+const ROTATION_INTERVAL_MS = 3000
+
 export function IntroSwiperScreen() {
-  const { goToBefore, missingAssets, markAssetMissing } = useExperience()
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const swiperRef = useRef(null)
+  const { goToBefore } = useExperience()
+  const [activeTextIndex, setActiveTextIndex] = useState(0)
+  const activeSlide = INTRO_TEXT_SLIDES[activeTextIndex]
 
-  const slides = useMemo(
-    () => [
-      {
-        key: 's1',
-        className: 'hero s1',
-        content: (
-          <h1>
-            Over the next 24 months,
-            <br />
-            you will make more than 5,000 decisions.
-          </h1>
-        ),
-      },
-      {
-        key: 's2',
-        className: 'hero s2',
-        content: (
-          <h1>
-            Most will be made under pressure.
-            <br />
-            This experience isn&apos;t about what you know.
-          </h1>
-        ),
-      },
-      {
-        key: 's3',
-        className: 'hero s3',
-        content: (
-          <h1>
-            It&apos;s about how you move forward
-            <br />
-            when clarity is incomplete.
-          </h1>
-        ),
-      },
-      {
-        key: 'path',
-        className: 'hero path',
-      },
-    ],
-    [],
-  )
+  useEffect(() => {
+    const textTimer = setInterval(() => {
+      setActiveTextIndex((prev) => (prev + 1) % INTRO_TEXT_SLIDES.length)
+    }, ROTATION_INTERVAL_MS)
 
-  const startJourney = () => {
-    const swiper = swiperRef.current
-    if (!swiper) return
-
-    swiper.slideTo(1)
-    swiper.allowTouchMove = true
-    swiper.params.autoplay = {
-      delay: 2500,
-      disableOnInteraction: false,
-    }
-    swiper.autoplay.start()
-  }
-
-  const openBeforeBegin = () => {
-    const swiper = swiperRef.current
-    const atLastSlide = swiper ? swiper.isEnd : currentSlide === slides.length - 1
-    if (atLastSlide) goToBefore()
-  }
+    return () => clearInterval(textTimer)
+  }, [])
 
   return (
-    <Swiper
-      className="heroSwiper hero-swiper"
-      modules={[Autoplay, EffectFade, Navigation, Pagination]}
-      speed={1000}
-      effect="fade"
-      fadeEffect={{ crossFade: true }}
-      loop={false}
-      allowTouchMove={false}
-      autoplay={false}
-      pagination={{ clickable: true }}
-      navigation
-      onSwiper={(swiper) => {
-        swiperRef.current = swiper
-        setCurrentSlide(swiper.activeIndex)
-      }}
-      onSlideChange={(swiper) => {
-        setCurrentSlide(swiper.activeIndex)
-        if (swiper.isEnd) {
-          swiper.autoplay.stop()
-          swiper.allowTouchMove = false
+    <section
+      className="hero intro-rotator"
+      role="button"
+      tabIndex={0}
+      onClick={goToBefore}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          goToBefore()
         }
       }}
+      aria-label="Touch anywhere to begin"
     >
-      {slides.map((slide) => (
-        <SwiperSlide key={slide.key}>
-          <section className={slide.className} onClick={slide.key === 'path' ? openBeforeBegin : undefined}>
-            <div className="overlay"></div>
-            {slide.content ? <div className="content">{slide.content}</div> : null}
+      <video className="intro-video" autoPlay muted loop playsInline src={introVideo} />
 
-            {slide.key === 's1' ? (
-              <>
-                <div className="start-btn">
-                  <button type="button" className="themeBtn themeBtn-reset" onClick={startJourney}>
-                    Start your journey
-                  </button>
-                </div>
-                <div className="site-logo">
-                  <AssetImage
-                    src={protovitiLogo}
-                    alt="Protiviti logo"
-                    missing={missingAssets.logo}
-                    onMissing={() => markAssetMissing('logo')}
-                  />
-                </div>
-              </>
-            ) : null}
+      <div className="intro-video-overlay" />
 
-            {slide.key === 'path' ? (
-              <>
-                <div className="site-logo">
-                  <AssetImage
-                    src={protovitiLogo}
-                    alt="Protiviti logo"
-                    missing={missingAssets.logo}
-                    onMissing={() => markAssetMissing('logo')}
-                  />
-                </div>
-                <div className="bottom-text">
-                  <div className="content-wrap">
-                    <div className="container">
-                      <div className="row">
-                        <button type="button" className="touch-logo touch-logo-btn" onClick={openBeforeBegin}>
-                          <AssetImage
-                            src={touchAnywhere}
-                            alt="Touch anywhere"
-                            missing={missingAssets.touch}
-                            onMissing={() => markAssetMissing('touch')}
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : null}
-          </section>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+      <div className="intro-rotating-copy" aria-live="polite">
+        <div key={activeSlide.key} className="intro-copy-slide is-active">
+          {activeSlide.kind === 'path' ? (
+            <h1 className="path-copy">
+              <span className="path-copy-top">{activeSlide.lines[0]}</span>
+              <span className="path-copy-bottom">{activeSlide.lines[1]}</span>
+            </h1>
+          ) : (
+            <h1 className="statement-copy">
+              <span className="statement-line">{activeSlide.lines[0]}</span>
+              <span className="statement-line">{activeSlide.lines[1]}</span>
+            </h1>
+          )}
+        </div>
+      </div>
+
+      <p className="intro-touch-hint">Touch anywhere to begin</p>
+    </section>
   )
 }

@@ -100,7 +100,7 @@ export function QuestionExperienceScreen() {
 
           <div className="start-btn">
             <button type="button" className="themeBtn themeBtn-reset" onClick={moveToAnswerPhase}>
-              Next
+              Answer
             </button>
           </div>
         </div>

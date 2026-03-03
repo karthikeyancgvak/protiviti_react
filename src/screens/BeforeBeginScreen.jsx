@@ -65,7 +65,7 @@ export function BeforeBeginScreen() {
 
       <div className="title">
         <div className="row">
-          <h1>Before we begin</h1>
+          <h1>Let’s personalize your experience​</h1>
         </div>
       </div>
 
@@ -117,13 +117,12 @@ export function BeforeBeginScreen() {
           </div>
 
           <button type="submit" className="btn custom-btn w-100">
-            Begin the Experience {'->'}
+            Begin {'->'}
           </button>
         </div>
       </form>
 
       <div className="form-below-content text-center">
-        <h3>We use this information to personalize your experience.</h3>
         <h4>Your information is handled in accordance with Protiviti&apos;s privacy standards.</h4>
       </div>
     </section>

@@ -3,6 +3,7 @@ import beaconIcon from './media/beacon-icon.png'
 import compassIcon from './media/compass-icon.png'
 import dropDownBlue from './media/drop-down-blue.png'
 import earthquakeVideo from './media/earthquake.mp4'
+import introVideo from './media/introvideo.mov'
 import pathToTransformation from './media/path-to-transformation.png'
 import profileIcon from './media/profile-icon.png'
 import protovitiLogo from './media/protoviti-logo.svg'
@@ -22,6 +23,7 @@ export {
   compassIcon,
   dropDownBlue,
   earthquakeVideo,
+  introVideo,
   pathToTransformation,
   profileIcon,
   protovitiLogo,

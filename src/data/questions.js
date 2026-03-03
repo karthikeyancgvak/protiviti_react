@@ -2,7 +2,7 @@ export const QUESTIONS = [
   {
     id: 'q1',
     prompt:
-      'The path narrows. Cracks form beneath your feet. Lights flicker along the edges. What do you do? Which do you choose?',
+      'The path narrows. Cracks form beneath your feet. Lights flicker along the edges. What do you do?',
     title: 'What do you do?',
     timerSeconds: 10,
     options: [
@@ -15,7 +15,7 @@ export const QUESTIONS = [
   {
     id: 'q2',
     prompt:
-      'An opportunity opens up. Each direction leads forward. You will not have time to explore all of them.',
+      'Four paths open up. They all lean forward,but the roads are different. ​Which one do you choose?​',
     title: 'What do you do?',
     timerSeconds: 10,
     options: [
@@ -28,7 +28,7 @@ export const QUESTIONS = [
   {
     id: 'q3',
     prompt:
-      'Everything hits at once. Four interruptions animate in rapidly. Player must act or time expires.',
+      'Everything hits at once. Four potential disruptions are about to happen. ​Which one do you tackle first? ​',
     title: 'What do you do?',
     timerSeconds: 10,
     options: [
@@ -52,7 +52,7 @@ export const QUESTIONS = [
   },
   {
     id: 'q5',
-    prompt: 'The path disappears completely. You need clarity to move forward. What do you do?',
+    prompt: 'The path disappears completely. You need to lead your team and move forward. What do you do?',
     title: 'What do you do?',
     timerSeconds: 10,
     options: [

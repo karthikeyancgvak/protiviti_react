@@ -28,8 +28,8 @@ export function ThankYouScreen() {
         <div className="content-wrap">
           <div className="container">
             <div className="row">
-              <h1>{`Thank you ${displayName || 'there'}!`}</h1>
-              <p>This will be a short, personalized (4-6 minutes) designed to help you:</p>
+              <h1>There are four types of decision makers... which one are you?</h1>
+              <p>Answer 5 breif questions to:</p>
 
               <div className="col-md-4">
                 <div className="icon-con">
@@ -71,12 +71,11 @@ export function ThankYouScreen() {
         </div>
       </div>
 
-      <div className="bottom-next">
-        <h2>There are four types of decision makers... which one are you?</h2>
-      </div>
+   
       <div className="touch-next">
         <p>Touch anywhere to continue</p>
       </div>
     </section>
   )
 }
+

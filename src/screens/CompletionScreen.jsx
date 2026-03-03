@@ -95,7 +95,7 @@ export function CompletionScreen() {
       responses: answerSummary,
     }
 
-    console.log('Completion payload (ready for API):', completionPayload)
+    // console.log('Completion payload (ready for API):', completionPayload)
   }, [answerSummary, fullName, personaKey, score])
 
   const personaIconMap = {
@@ -212,7 +212,10 @@ export function CompletionScreen() {
             <div className="col-lg-8">
               <div className="shield-section text-center">
                 <div className="container">
-                  <h2 className="main-title mb-4">{persona.title}</h2>
+                  <div className="profile-header mb-4">
+                    <div className="profile-label">Your transformation profile:</div>
+                    <h2 className="main-title">{persona.title}</h2>
+                  </div>
                   <div className="shield-icon">
                     <div className="icon">
                       <AssetImage
@@ -300,7 +303,7 @@ export function CompletionScreen() {
                             aria-expanded={isCountryMenuOpen}
                           >
                             <span className={formState.country ? '' : 'is-placeholder'}>
-                              {formState.country || 'Please Select'}
+                              {formState.country || 'Country'}
                             </span>
                           </button>
 
@@ -343,11 +346,10 @@ export function CompletionScreen() {
                       </form>
 
                       <p className="small-note mt-4">
-                        By submitting this form, I understand that I will receive an automated response with my
-                        Transformation type.
+                      By submitting this form, I understand that I will receive Protiviti emails​
                       </p>
                       {isSubmitting ? <p className="small-note mt-2">Please wait, submitting your response...</p> : null}
-                      {isSubmitted ? <p className="small-note mt-2">Thank You For your response v1</p> : null}
+                      {isSubmitted ? <p className="small-note mt-2">Thank You For your response</p> : null}
                       {submitError ? <p className="small-note mt-2">{submitError}</p> : null}
                     </div>
                   </div>
