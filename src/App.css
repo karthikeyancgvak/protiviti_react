@@ -83,7 +83,7 @@ body {
 
 .hero.intro-rotator .path-copy-top {
   font-size: clamp(28px, 2.4vw, 42px);
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0.5px;
 }
 
@@ -103,7 +103,7 @@ body {
   bottom: 34px;
   color: rgba(255, 255, 255, 0.95);
   font-size: clamp(18px, 1.1vw, 26px);
-  font-weight: 400;
+  font-weight: 300;
   left: 0;
   letter-spacing: 0.6px;
   margin: 0;
