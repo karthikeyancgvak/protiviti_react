@@ -30,7 +30,7 @@ body {
 }
 
 .hero.intro-rotator .intro-video-overlay {
-  background: radial-gradient(circle at 50% 24%, rgba(120, 196, 245, 0.2), rgba(0, 39, 74, 0.28) 70%);
+  /* background: radial-gradient(circle at 50% 24%, rgba(120, 196, 245, 0.2), rgba(0, 39, 74, 0.28) 70%); */
   inset: 0;
   position: absolute;
   z-index: 1;
