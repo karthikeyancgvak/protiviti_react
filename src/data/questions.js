@@ -15,7 +15,7 @@ export const QUESTIONS = [
   {
     id: 'q2',
     prompt:
-      'Four paths open up. They all lean forward,but the roads are different. ​Which one do you choose?​',
+      'Four paths open up. They all lean forward, but the roads are different. ​Which one do you choose?​',
     title: 'What do you do?',
     timerSeconds: 10,
     options: [

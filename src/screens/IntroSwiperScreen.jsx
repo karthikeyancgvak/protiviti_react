@@ -74,7 +74,7 @@ export function IntroSwiperScreen() {
         </div>
       </div>
 
-      <p className="intro-touch-hint">Touch anywhere to begin</p>
+      <p className="intro-touch-hint">Start your Journey</p>
     </section>
   )
 }
