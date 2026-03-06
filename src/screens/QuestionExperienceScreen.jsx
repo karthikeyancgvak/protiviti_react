@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { earthquakeVideo, protovitiLogo } from '../assets/mediaAssets'
+import { earthquakeVideo, protovitiLogo, questionBgFrame } from '../assets/mediaAssets'
 import { AssetImage } from '../components/AssetImage'
 import { ProgressTimeline } from '../components/ProgressTimeline'
 import { useExperience } from '../context/ExperienceContext'
@@ -33,7 +33,7 @@ function AnswerPhase({ question, onSelect }) {
         <div className="overlay"></div>
         <div className="question">
           <h1>{question.title}</h1>
-          <span>{formattedTime}</span>
+          <span className={timeLeft === 0 ? 'timer-flash' : undefined}>{formattedTime}</span>
         </div>
         <div className="three-opt">
           <div className="container">
@@ -68,9 +68,12 @@ export function QuestionExperienceScreen() {
   const displayName = `${firstName}${lastInitial ? ` ${lastInitial}` : ''}`.trim() || 'Guest'
 
   return (
-    <section className="hero thank-you you-pick moment-one">
+    <section
+      className="hero thank-you you-pick moment-one"
+      style={{ backgroundImage: `url(${questionBgFrame})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+    >
       {!missingAssets.video ? (
-        <video autoPlay muted loop playsInline onError={() => markAssetMissing('video')}>
+        <video autoPlay muted loop playsInline poster={questionBgFrame} onError={() => markAssetMissing('video')}>
           <source src={earthquakeVideo} type="video/mp4" />
         </video>
       ) : (
@@ -119,3 +122,4 @@ export function QuestionExperienceScreen() {
     </section>
   )
 }
+

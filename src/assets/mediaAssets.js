@@ -7,6 +7,7 @@ import introVideo from './media/introvideo.mp4'
 import pathToTransformation from './media/path-to-transformation.png'
 import profileIcon from './media/profile-icon.png'
 import protovitiLogo from './media/protoviti-logo.svg'
+import questionBgFrame from './media/quesBG.png'
 import reportFormBg from './media/report-form-bg.png'
 import s1Background from './media/s1-bg.png'
 import searchGraphIcon from './media/search-graph-icon.png'
@@ -27,6 +28,7 @@ export {
   pathToTransformation,
   profileIcon,
   protovitiLogo,
+  questionBgFrame,
   reportFormBg,
   s1Background,
   searchGraphIcon,
@@ -37,4 +39,3 @@ export {
   thankYouIcon3,
   touchAnywhere,
 }
-
