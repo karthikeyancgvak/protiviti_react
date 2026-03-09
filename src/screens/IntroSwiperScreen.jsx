@@ -2,6 +2,34 @@ import { useEffect, useState } from 'react'
 import { introVideo } from '../assets/mediaAssets'
 import { useExperience } from '../context/ExperienceContext'
 
+function renderStatementLine(line, lineIndex, slideKey) {
+  if (slideKey === 'decisions' && lineIndex === 0) {
+    return (
+      <>
+        Over the next <span className="statement-emphasis">24 months</span>,
+      </>
+    )
+  }
+
+  if (slideKey === 'decisions' && lineIndex === 1) {
+    return (
+      <>
+        you will make more than <span className="statement-emphasis">5,000 decisions</span>.
+      </>
+    )
+  }
+
+  if (slideKey === 'pressure' && lineIndex === 1) {
+    return <span className="statement-emphasis">This experience isn't about what you know.</span>
+  }
+
+  if (slideKey === 'clarity' && lineIndex === 1) {
+    return <span className="statement-emphasis">when clarity is incomplete.</span>
+  }
+
+  return line
+}
+
 const INTRO_TEXT_SLIDES = [
   {
     key: 'path',
@@ -67,8 +95,11 @@ export function IntroSwiperScreen() {
             </h1>
           ) : (
             <h1 className="statement-copy">
-              <span className="statement-line">{activeSlide.lines[0]}</span>
-              <span className="statement-line">{activeSlide.lines[1]}</span>
+              {activeSlide.lines.map((line, index) => (
+                <span key={`${activeSlide.key}-${index}`} className="statement-line">
+                  {renderStatementLine(line, index, activeSlide.key)}
+                </span>
+              ))}
             </h1>
           )}
         </div>
