@@ -251,7 +251,7 @@ body {
   }
 
   .hero.intro-rotator .path-copy-bottom {
-    font-size: clamp(66px, 4.8vw, 120px);
+    font-size: clamp(66px, 4.8vw, 130px);
   }
 
   .intro-touch-hint {
