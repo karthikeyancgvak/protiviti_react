@@ -19,14 +19,6 @@ function renderStatementLine(line, lineIndex, slideKey) {
     )
   }
 
-  if (slideKey === 'pressure' && lineIndex === 1) {
-    return <span className="statement-emphasis">This experience isn't about what you know.</span>
-  }
-
-  if (slideKey === 'clarity' && lineIndex === 1) {
-    return <span className="statement-emphasis">when clarity is incomplete.</span>
-  }
-
   return line
 }
 
@@ -43,12 +35,12 @@ const INTRO_TEXT_SLIDES = [
   },
   {
     key: 'pressure',
-    kind: 'statement',
+    kind: 'path',
     lines: ['Most will be made under pressure.', "This experience isn't about what you know."],
   },
   {
     key: 'clarity',
-    kind: 'statement',
+    kind: 'path',
     lines: ["It's about how you move forward", 'when clarity is incomplete.'],
   },
 ]
