@@ -6,7 +6,7 @@ function renderStatementLine(line, lineIndex, slideKey) {
   if (slideKey === 'decisions' && lineIndex === 0) {
     return (
       <>
-        Over the next <span className="statement-emphasis">24 months</span>,
+        Over the next <span className="statement-emphasis">24 months</span>, you will make more than
       </>
     )
   }
@@ -14,7 +14,7 @@ function renderStatementLine(line, lineIndex, slideKey) {
   if (slideKey === 'decisions' && lineIndex === 1) {
     return (
       <>
-        you will make more than <span className="statement-emphasis">5,000 decisions</span>.
+        <span className="statement-emphasis">5,000 decisions</span>.
       </>
     )
   }
@@ -39,7 +39,7 @@ const INTRO_TEXT_SLIDES = [
   {
     key: 'decisions',
     kind: 'statement',
-    lines: ['Over the next 24 months,', 'you will make more than 5,000 decisions.'],
+    lines: ['Over the next 24 months, you will make more than', '5,000 decisions.'],
   },
   {
     key: 'pressure',
@@ -53,7 +53,7 @@ const INTRO_TEXT_SLIDES = [
   },
 ]
 
-const ROTATION_INTERVAL_MS = 3000
+const ROTATION_INTERVAL_MS = 15000
 
 export function IntroSwiperScreen() {
   const { goToBefore } = useExperience()
@@ -94,9 +94,12 @@ export function IntroSwiperScreen() {
               <span className="path-copy-bottom">{activeSlide.lines[1]}</span>
             </h1>
           ) : (
-            <h1 className="statement-copy">
+            <h1 className={`statement-copy statement-copy-${activeSlide.key}`}>
               {activeSlide.lines.map((line, index) => (
-                <span key={`${activeSlide.key}-${index}`} className="statement-line">
+                <span
+                  key={`${activeSlide.key}-${index}`}
+                  className={`statement-line statement-line-${activeSlide.key} statement-line-${index}`}
+                >
                   {renderStatementLine(line, index, activeSlide.key)}
                 </span>
               ))}
