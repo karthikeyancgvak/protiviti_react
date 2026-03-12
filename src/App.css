@@ -105,6 +105,11 @@ body {
   letter-spacing: 0.5px;
 }
 
+.hero.intro-rotator .path-copy-pressure .path-copy-top,
+.hero.intro-rotator .path-copy-clarity .path-copy-top {
+  font-size: clamp(32px, 2.7vw, 48px);
+}
+
 .hero.intro-rotator .path-copy-bottom {
   font-size: clamp(50px, 5vw, 92px);
   font-weight: 400;
@@ -192,6 +197,11 @@ body {
     font-size: clamp(24px, 2vw, 36px);
   }
 
+  .hero.intro-rotator .path-copy-pressure .path-copy-top,
+  .hero.intro-rotator .path-copy-clarity .path-copy-top {
+    font-size: clamp(28px, 2.25vw, 42px);
+  }
+
   .hero.intro-rotator .path-copy-bottom {
     font-size: clamp(44px, 4.2vw, 76px);
   }
@@ -226,6 +236,11 @@ body {
 
   .hero.intro-rotator .path-copy-top {
     font-size: clamp(34px, 2.2vw, 54px);
+  }
+
+  .hero.intro-rotator .path-copy-pressure .path-copy-top,
+  .hero.intro-rotator .path-copy-clarity .path-copy-top {
+    font-size: clamp(38px, 2.5vw, 60px);
   }
 
   .hero.intro-rotator .path-copy-bottom {
@@ -1477,6 +1492,11 @@ body {
 
     .hero.intro-rotator .path-copy-top {
         font-size: clamp(27px, 1.75vw, 43px); /* reduced another ~10% */
+    }
+
+    .hero.intro-rotator .path-copy-pressure .path-copy-top,
+    .hero.intro-rotator .path-copy-clarity .path-copy-top {
+        font-size: clamp(31px, 2vw, 49px);
     }
 
     .hero.intro-rotator .path-copy-bottom {
