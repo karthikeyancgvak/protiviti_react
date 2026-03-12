@@ -22,6 +22,26 @@ function renderStatementLine(line, lineIndex, slideKey) {
   return line
 }
 
+function renderPathLine(line, lineIndex, slideKey) {
+  if (slideKey === 'decisions' && lineIndex === 0) {
+    return (
+      <>
+        Over the next <span className="statement-emphasis">24 months</span>, you will make more than
+      </>
+    )
+  }
+
+  if (slideKey === 'decisions' && lineIndex === 1) {
+    return (
+      <>
+        <span className="statement-emphasis">5,000 decisions</span>.
+      </>
+    )
+  }
+
+  return line
+}
+
 const INTRO_TEXT_SLIDES = [
   {
     key: 'path',
@@ -30,7 +50,7 @@ const INTRO_TEXT_SLIDES = [
   },
   {
     key: 'decisions',
-    kind: 'statement',
+    kind: 'path',
     lines: ['Over the next 24 months, you will make more than', '5,000 decisions.'],
   },
   {
@@ -81,9 +101,9 @@ export function IntroSwiperScreen() {
       <div className="intro-rotating-copy" aria-live="polite">
         <div key={activeSlide.key} className="intro-copy-slide is-active">
           {activeSlide.kind === 'path' ? (
-            <h1 className="path-copy">
-              <span className="path-copy-top">{activeSlide.lines[0]}</span>
-              <span className="path-copy-bottom">{activeSlide.lines[1]}</span>
+            <h1 className={`path-copy path-copy-${activeSlide.key}`}>
+              <span className="path-copy-top">{renderPathLine(activeSlide.lines[0], 0, activeSlide.key)}</span>
+              <span className="path-copy-bottom">{renderPathLine(activeSlide.lines[1], 1, activeSlide.key)}</span>
             </h1>
           ) : (
             <h1 className={`statement-copy statement-copy-${activeSlide.key}`}>
