@@ -65,7 +65,7 @@ const INTRO_TEXT_SLIDES = [
   },
 ]
 
-const ROTATION_INTERVAL_MS = 15000
+const ROTATION_INTERVAL_MS = 3000
 
 export function IntroSwiperScreen() {
   const { goToBefore } = useExperience()
