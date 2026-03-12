@@ -29,7 +29,7 @@ export function ThankYouScreen() {
           <div className="container">
             <div className="row">
               <h1>There are four types of decision makers... which one are you?</h1>
-              <p>Answer 5 breif questions to:</p>
+              <p>Answer 5 brief questions to:</p>
 
               <div className="col-md-4">
                 <div className="icon-con">
@@ -78,4 +78,3 @@ export function ThankYouScreen() {
     </section>
   )
 }
-
