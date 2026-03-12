@@ -220,7 +220,7 @@ body {
 @media (min-width: 1921px) {
   .intro-rotating-copy {
     bottom: 120px;
-    width: min(1790px, calc(100% - 800px))
+    width: min(1930px, calc(100% - 800px))
   }
 
   .hero.intro-rotator .intro-copy-slide h1.statement-copy {
